@@ -1,5 +1,5 @@
 FROM scratch
 
-ARG VERSION=0.2.1
+ARG VERSION=0.3.0b0
 
 ENTRYPOINT ["useless"]
