@@ -1,0 +1,8 @@
+---
+commitizen:
+  name: cz_conventional_commits
+  tag_format: $version
+  version_files:
+    - main.go
+    - Dockerfile
+  version: 0.1.0
