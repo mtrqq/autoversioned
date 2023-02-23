@@ -1,6 +1,18 @@
-FROM scratch
+FROM golang:1.20-alpine AS builder
 
-ARG VERSION=1.0.0
+WORKDIR /usr/app
 
+COPY server /usr/app/server
+COPY go.mod /usr/app/go.mod
 
-ENTRYPOINT ["useless"]
+RUN \
+    CGO_ENABLED=0 \
+    go mod download || true && \
+    go build -o ./serve -ldflags "-s -w" ./server/serve.go
+
+FROM alpine:3.17.2
+
+WORKDIR /usr/app
+COPY --from=builder /usr/app/serve /usr/app
+
+ENTRYPOINT ["/usr/app/serve"]

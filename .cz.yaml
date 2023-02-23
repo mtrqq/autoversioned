@@ -4,5 +4,5 @@ commitizen:
   tag_format: $version
   version: 1.0.0
   version_files:
-  - main.go
-  - Dockerfile
+  - server/serve.go
+  - charts/autoversioned/Chart.yaml
