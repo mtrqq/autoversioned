@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: autoversioned
 
-version: 1.0.0
-appVersion: 1.0.0
+version: 1.1.0
+appVersion: 1.1.0
 
 type: application
