@@ -1,3 +1,11 @@
+## 1.3.0 (2023-02-24)
+
+### Fix
+
+- add more permissions to pipeline
+- fix github tokens inside release
+- add target commit to creating release
+
 ## 1.2.0 (2023-02-24)
 
 ### Feat

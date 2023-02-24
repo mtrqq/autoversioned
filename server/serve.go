@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-var version = "1.2.0"
+var version = "1.3.0"
 
 func getVersion(w http.ResponseWriter, req *http.Request) {
 	log.Printf("Responding with version")
