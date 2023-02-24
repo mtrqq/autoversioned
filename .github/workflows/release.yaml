@@ -163,4 +163,5 @@ jobs:
         body_path: _changelog_fragment.md
         tag_name: v${{ steps.cz-bump.outputs.version }}
         prerelease: ${{ github.event.inputs.prerelease != 'none' }}
+        target_commitish: ${{ needs.create-pr.outputs.branch }}
         files: build/*
