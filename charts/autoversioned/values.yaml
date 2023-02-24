@@ -4,6 +4,8 @@
 
 replicaCount: 1
 
+secretValue:
+
 image:
   repository: mtrqq/autoversioned
   pullPolicy: IfNotPresent

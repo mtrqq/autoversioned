@@ -1,19 +1,48 @@
 package main
 
 import (
-	"log"
+	"encoding/json"
+	"flag"
+	"fmt"
 	"net/http"
+	"os"
+
+	"github.com/rs/zerolog"
+	"github.com/rs/zerolog/log"
 )
 
-var version = "1.3.0"
+var (
+	version = "1.3.0"
+	secret  = "none"
+	port    = 8080
+)
 
 func getVersion(w http.ResponseWriter, req *http.Request) {
-	log.Printf("Responding with version")
-	w.Write([]byte(version))
+	log.Info().Msgf("Responding with version %s", version)
+
+	response := map[string]string{
+		"version": version,
+		"secret":  secret,
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
 }
 
 func main() {
-	log.Printf("Starting http server at port 8080")
+	log.Info().Msg("Starting http server at port 8080")
+
 	http.HandleFunc("/", getVersion)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+}
+
+func init() {
+	flag.IntVar(&port, "port", 8080, "port to listen at")
+	flag.Parse()
+
+	if secretEnv, exists := os.LookupEnv("SECRET_VALUE"); exists {
+		secret = secretEnv
+	}
+
+	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 }
