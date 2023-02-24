@@ -1,0 +1,9 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  init:
+    cmds:
+      - pre-commit install --install-hooks -t pre-commit -t commit-msg -t push
+    desc: Installs pre-commit hooks to automate commits validation
