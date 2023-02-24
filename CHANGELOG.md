@@ -1,3 +1,9 @@
+## v2.4.0 (2023-02-24)
+
+### Feat
+
+- added helmfile + vault integration
+
 ## v2.3.1 (2023-02-24)
 
 ### Fix
