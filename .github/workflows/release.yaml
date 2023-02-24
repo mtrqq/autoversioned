@@ -175,7 +175,7 @@ jobs:
       run: echo '${{ steps.deploy-image.outputs.imageid }}' > docker_image_api.txt
 
     - name: Upload binaries to release
-      uses: xresloader/upload-to-github-release@1.3.11
+      uses: xresloader/upload-to-github-release@v1.3.11
       with:
         file: docker_image_api.txt
         release_id: ${{ needs.create-release.outputs.id }}
