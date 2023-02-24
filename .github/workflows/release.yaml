@@ -96,7 +96,7 @@ jobs:
         cache: true
 
     - name: Download packages
-      run: go mod download
+      run: go mod download || true
 
     - name: Build
       run:
