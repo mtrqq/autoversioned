@@ -86,7 +86,7 @@ jobs:
         github-token: ${{ secrets.AUTOVERSIONING_BOT_TOKEN }}
         number: ${{ steps.create-pull-request.outputs.pull-request-number }}
 
-  build-executables:
+  build-api:
     runs-on: ubuntu-latest
     needs: [create-pr]
     steps:
@@ -98,6 +98,8 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: '~=1.20'
+        go-version-file: api/go.mod
+        cache-dependency-path: api/go.sum
         cache: true
 
     - name: Download packages
@@ -116,7 +118,7 @@ jobs:
 
     - uses: actions/upload-artifact@v3
       with:
-        name: serve-executable
+        name: build
         path: build/*
 
   create-release:
@@ -127,7 +129,7 @@ jobs:
       contents: write       # to create a github release
     needs:
       - create-pr
-      - build-executables
+      - build-api
 
     steps:
     - uses: actions/checkout@v3.3.0
@@ -157,7 +159,7 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:
-        name: serve-executable
+        name: build
         path: build
 
     - uses: actions/download-artifact@v3
