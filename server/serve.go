@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	version = "1.3.0"
+	version = "2.0.0"
 	secret  = "none"
 	port    = 8080
 )
