@@ -60,6 +60,11 @@ jobs:
         # extra_requirements: 'git+https://github.com/meltano/commitizen-version-bump@main'
         changelog_increment_filename: _changelog_fragment.md
 
+    - uses: actions/upload-artifact@v3
+      with:
+        name: changelog
+        path: _changelog_fragment.md
+
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v4
       id: create-pull-request
@@ -151,6 +156,10 @@ jobs:
       with:
         name: serve-executable
         path: build
+
+    - uses: actions/download-artifact@v3
+      with:
+        name: changelog
 
     - name: Draft Release
       id: draft-release
