@@ -1,3 +1,11 @@
+## v2.3.0 (2023-02-24)
+
+## v2.3.0 (2023-02-24)
+
+### Feat
+
+- attempt to implement async release pipeline
+
 ## v2.2.0 (2023-02-24)
 
 ### Feat
