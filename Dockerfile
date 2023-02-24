@@ -4,6 +4,7 @@ WORKDIR /usr/app
 
 COPY server /usr/app/server
 COPY go.mod /usr/app/go.mod
+COPY go.sum /usr/app/go.mod
 
 RUN \
     CGO_ENABLED=0 \
