@@ -36,6 +36,7 @@ jobs:
       branch: release/v${{ steps.cz-bump.outputs.version }}
       version: ${{ steps.cz-bump.outputs.version }}
       tag: v${{ steps.cz-bump.outputs.version }}
+      id: ${{ steps.draft-release.outputs.id }}
 
     steps:
     - uses: actions/checkout@v3.3.0
@@ -126,13 +127,11 @@ jobs:
       working-directory: api
 
     - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
+      uses: xresloader/upload-to-github-release@main
       with:
-        file: build/*
-        file_glob: true
+        file: docker_image_api.txt
+        release_id: ${{ needs.create-release.outputs.id }}
         overwrite: true
-        tag: ${{ needs.create-release.outputs.tag }}
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
 
   build-api-image:
     runs-on: ubuntu-latest
@@ -174,9 +173,8 @@ jobs:
       run: echo '${{ steps.deploy-image.outputs.imageid }}' > docker_image_api.txt
 
     - name: Upload binaries to release
-      uses: svenstaro/upload-release-action@v2
+      uses: xresloader/upload-to-github-release@main
       with:
         file: docker_image_api.txt
+        release_id: ${{ needs.create-release.outputs.id }}
         overwrite: true
-        tag: ${{ needs.create-release.outputs.tag }}
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
