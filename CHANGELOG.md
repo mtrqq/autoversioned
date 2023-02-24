@@ -1,3 +1,24 @@
+## v2.2.0 (2023-02-24)
+
+### Feat
+
+- add port forwarding
+
+### Fix
+
+- build executables from other directories
+
+## v2.1.0 (2023-02-24)
+
+### Feat
+
+- **core**: split modules for golang api
+- add skaffold configuration + some minor rearrangement inside github repo
+
+### Fix
+
+- test caching
+
 ## v2.0.1 (2023-02-24)
 
 ### Fix
