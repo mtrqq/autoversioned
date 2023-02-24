@@ -107,14 +107,13 @@ jobs:
 
     - name: Build
       run:
-        GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./build/serve-linux-amd64 -ldflags "-s -w" ./api/serve.go &&
-        GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -o ./build/serve-linux-386 -ldflags "-s -w" ./api/serve.go &&
-        GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -o ./build/serve-linux-arm -ldflags "-s -w" ./api/serve.go
-      shell: bash
+        GOARCH=amd64 go build -o ../build/serve-linux-amd64 -ldflags "-s -w" ./serve.go &&
+        GOARCH=386 go build -o ../build/serve-linux-386 -ldflags "-s -w" ./serve.go &&
+        GOARCH=arm go build -o ../build/serve-linux-arm -ldflags "-s -w" ./serve.go
       env:
-        GOOS: ${{ matrix.os }}
-        GOARCH: ${{ matrix.arch }}
-        CGO_ENABLED: "false"
+        CGO_ENABLED: "0"
+        GOOS: linux
+      working-directory: api
 
     - uses: actions/upload-artifact@v3
       with:
