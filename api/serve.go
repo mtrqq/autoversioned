@@ -7,21 +7,21 @@ import (
 	"net/http"
 	"os"
 
+	lib "github.com/mtrqq/autoversioning/api/internal"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
 
 var (
-	version = "2.0.1"
-	secret  = "none"
-	port    = 8080
+	secret = "none"
+	port   = 8080
 )
 
 func getVersion(w http.ResponseWriter, req *http.Request) {
-	log.Info().Msgf("Responding with version %s", version)
+	log.Info().Msgf("Responding with version %s", lib.Version)
 
 	response := map[string]string{
-		"version": version,
+		"version": lib.Version,
 		"secret":  secret,
 	}
 

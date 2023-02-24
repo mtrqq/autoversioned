@@ -1,4 +1,4 @@
-module github.com/mtrqq/autoversioning
+module github.com/mtrqq/autoversioning/api
 
 go 1.20
 
