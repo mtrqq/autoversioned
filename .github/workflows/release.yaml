@@ -35,6 +35,7 @@ jobs:
     outputs:
       branch: release/v${{ steps.cz-bump.outputs.version }}
       version: ${{ steps.cz-bump.outputs.version }}
+      tag: v${{ steps.cz-bump.outputs.version }}
 
     steps:
     - uses: actions/checkout@v3.3.0
@@ -60,11 +61,6 @@ jobs:
         # extra_requirements: 'git+https://github.com/meltano/commitizen-version-bump@main'
         changelog_increment_filename: _changelog_fragment.md
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: changelog
-        path: _changelog_fragment.md
-
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v4
       id: create-pull-request
@@ -86,9 +82,21 @@ jobs:
         github-token: ${{ secrets.AUTOVERSIONING_BOT_TOKEN }}
         number: ${{ steps.create-pull-request.outputs.pull-request-number }}
 
+    - name: Draft Release
+      id: draft-release
+      uses: softprops/action-gh-release@v1
+      with:
+        body_path: _changelog_fragment.md
+        tag_name: v${{ steps.cz-bump.outputs.version }}
+        prerelease: ${{ github.event.inputs.prerelease != 'none' }}
+        target_commitish: release/v${{ steps.cz-bump.outputs.version }}
+        files: build/*
+        draft: true
+
   build-api:
     runs-on: ubuntu-latest
-    needs: [create-pr]
+    needs:
+      - create-release
     steps:
     - uses: actions/checkout@v3.3.0
       with:
@@ -115,20 +123,21 @@ jobs:
         GOOS: linux
       working-directory: api
 
-    - uses: actions/upload-artifact@v3
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        name: build
-        path: build/*
+        file: build/*
+        file_glob: true
+        overwrite: true
+        tag: ${{ needs.create-pr.outputs.tag }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
 
-  create-release:
+  build-api-image:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    permissions:
-      contents: write       # to create a github release
     needs:
       - create-pr
-      - build-api
 
     steps:
     - uses: actions/checkout@v3.3.0
@@ -149,6 +158,7 @@ jobs:
 
     - name: Build and push
       uses: docker/build-push-action@v4
+      id: deploy-image
       with:
         context: api
         push: true
@@ -156,22 +166,13 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
-    - uses: actions/download-artifact@v3
-      with:
-        name: build
-        path: build
+    - name: Write out docker image tag
+      run: echo '${{ steps.deploy-image.outputs.imageid }}' > docker_image_api.txt
 
-    - uses: actions/download-artifact@v3
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        name: changelog
-
-    - name: Draft Release
-      id: draft-release
-      uses: softprops/action-gh-release@v1
-      with:
-        body_path: _changelog_fragment.md
-        tag_name: v${{ needs.create-pr.outputs.version }}
-        prerelease: ${{ github.event.inputs.prerelease != 'none' }}
-        target_commitish: ${{ needs.create-pr.outputs.branch }}
-        files: build/*
-        draft: true
+        file: docker_image_api.txt
+        overwrite: true
+        tag: ${{ needs.create-pr.outputs.tag }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
