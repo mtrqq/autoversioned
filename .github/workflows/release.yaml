@@ -165,9 +165,10 @@ jobs:
       id: draft-release
       uses: softprops/action-gh-release@v1
       with:
-        draft: true
+        name: v${{ needs.create-pr.outputs.version }}
         body_path: _changelog_fragment.md
-        tag_name: v${{ steps.cz-bump.outputs.version }}
+        tag_name: v${{ needs.create-pr.outputs.version }}
         prerelease: ${{ github.event.inputs.prerelease != 'none' }}
         target_commitish: ${{ needs.create-pr.outputs.branch }}
         files: build/*
+        draft: true
