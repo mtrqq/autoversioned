@@ -1,4 +1,4 @@
-name: Release
+name: release
 
 on:
   workflow_dispatch:
@@ -165,7 +165,6 @@ jobs:
       id: draft-release
       uses: softprops/action-gh-release@v1
       with:
-        name: v${{ needs.create-pr.outputs.version }}
         body_path: _changelog_fragment.md
         tag_name: v${{ needs.create-pr.outputs.version }}
         prerelease: ${{ github.event.inputs.prerelease != 'none' }}
