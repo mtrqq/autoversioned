@@ -132,6 +132,8 @@ jobs:
         file: docker_image_api.txt
         release_id: ${{ needs.create-release.outputs.id }}
         overwrite: true
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
   build-api-image:
     runs-on: ubuntu-latest
@@ -178,3 +180,5 @@ jobs:
         file: docker_image_api.txt
         release_id: ${{ needs.create-release.outputs.id }}
         overwrite: true
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
