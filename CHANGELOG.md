@@ -1,3 +1,9 @@
+## 3.0.0 (2023-02-24)
+
+### Fix
+
+- add cache for github actions
+
 ## 2.0.0 (2023-02-24)
 
 ### Fix
