@@ -146,6 +146,9 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - run: git status -b
+    - run: cat ./server/serve.go
+
     - name: Build and push
       uses: docker/build-push-action@v4
       with:

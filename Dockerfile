@@ -8,7 +8,6 @@ COPY go.sum /usr/app/go.sum
 
 RUN \
     CGO_ENABLED=0 \
-    cat ./server/serve.go && \
     go mod download || true && \
     go build -o ./serve -ldflags "-s -w" ./server/serve.go
 
