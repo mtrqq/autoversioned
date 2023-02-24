@@ -2,14 +2,12 @@ FROM golang:1.20-alpine AS builder
 
 WORKDIR /usr/app
 
-COPY server /usr/app/server
-COPY go.mod /usr/app/go.mod
-COPY go.sum /usr/app/go.sum
+COPY . /usr/app
 
 RUN \
     CGO_ENABLED=0 \
     go mod download || true && \
-    go build -o ./serve -ldflags "-s -w" ./server/serve.go
+    go build -o ./serve -ldflags "-s -w" ./serve.go
 
 FROM alpine:3.17.2
 

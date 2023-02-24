@@ -105,9 +105,9 @@ jobs:
 
     - name: Build
       run:
-        GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./build/serve-linux-amd64 -ldflags "-s -w" ./server/serve.go &&
-        GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -o ./build/serve-linux-386 -ldflags "-s -w" ./server/serve.go &&
-        GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -o ./build/serve-linux-arm -ldflags "-s -w" ./server/serve.go
+        GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o ./build/serve-linux-amd64 -ldflags "-s -w" ./api/serve.go &&
+        GOOS=linux GOARCH=386 CGO_ENABLED=0 go build -o ./build/serve-linux-386 -ldflags "-s -w" ./api/serve.go &&
+        GOOS=linux GOARCH=arm CGO_ENABLED=0 go build -o ./build/serve-linux-arm -ldflags "-s -w" ./api/serve.go
       shell: bash
       env:
         GOOS: ${{ matrix.os }}
@@ -146,13 +146,10 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - run: git status -b
-    - run: cat ./server/serve.go
-
     - name: Build and push
       uses: docker/build-push-action@v4
       with:
-        context: .
+        context: api
         push: true
         tags: mtrqq/autoversioned:${{ needs.create-pr.outputs.version }}
         cache-from: type=gha

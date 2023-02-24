@@ -26,14 +26,27 @@ func getVersion(w http.ResponseWriter, req *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(response)
+}
+
+func getHealth(w http.ResponseWriter, req *http.Request) {
+	response := map[string]string{
+		"status": "ok",
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(response)
 }
 
 func main() {
-	log.Info().Msg("Starting http server at port 8080")
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", getVersion)
+	mux.HandleFunc("/health", getHealth)
 
-	http.HandleFunc("/", getVersion)
-	http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	log.Info().Msg("Starting http server at port 8080")
+	http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
 }
 
 func init() {
