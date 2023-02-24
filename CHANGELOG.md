@@ -1,3 +1,11 @@
+## 2.0.0 (2023-02-24)
+
+### Fix
+
+- change copy instruction inside Dockerfile
+- added go.sum to Dockerfile copy
+- **deployment**: added secret value injection
+
 ## 1.3.0 (2023-02-24)
 
 ### Fix
