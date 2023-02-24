@@ -48,7 +48,7 @@ spec:
               port: 8080
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          {{- if .Values.secretValue -}}
+          {{ if .Values.secretValue }}
           env:
             - name: SECRET_VALUE
               valueFrom:

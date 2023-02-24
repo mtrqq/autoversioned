@@ -1,0 +1,2 @@
+nameOverride: dev
+secretValue: ref+vault://secret/test#joke
