@@ -2,8 +2,8 @@
 commitizen:
   name: cz_conventional_commits
   tag_format: v$major.$minor.$patch$prerelease
-  version: 2.0.1
+  version: 2.1.0
   version_files:
-  - 'api/internal/config.go'
+  - 'api/internal/config.go:^    Version ='
   - 'charts/autoversioned/Chart.yaml:^version:'
   - 'charts/autoversioned/Chart.yaml:^appVersion:'
