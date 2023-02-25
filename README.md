@@ -1,6 +1,6 @@
 # Autoversioned
 
-Reference project with for versioning approach reference
+Reference project with for versioning approach demo
 
 ## Components
 
