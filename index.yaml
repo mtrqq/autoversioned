@@ -1,0 +1,13 @@
+apiVersion: v1
+entries:
+  autoversioned:
+  - apiVersion: v2
+    appVersion: 2.4.1
+    created: "2023-02-25T08:25:51.789580848Z"
+    digest: a7e36b6515b3e463fbed9d0620e07aef8644392bb9c7d7043964310f01d743a1
+    name: autoversioned
+    type: application
+    urls:
+    - https://mtrqq.github.io/autoversioned/autoversioned-2.4.1.tgz
+    version: 2.4.1
+generated: "2023-02-25T08:25:51.788901532Z"
