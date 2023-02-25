@@ -209,7 +209,7 @@ jobs:
 
     - name: Update index.yaml
       run: |
-        mv -v build/* . && helm repo index --url https://mtrqq.github.io/autoversioned --merge index.yaml .
+        mv -v packages/* . && helm repo index --url https://mtrqq.github.io/autoversioned --merge index.yaml .
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
