@@ -24,7 +24,12 @@ Reference project with for versioning approach reference
 
 ### Run using docker
 
-* docker run -p 8080:8080 mtrqq/autoversioned:<version>
+* `docker run -p 8080:8080 mtrqq/autoversioned:<version>`
+
+### Run using golang
+
+* `go mod download`
+* `go run api/serve.go`
 
 ## Versioning
 
