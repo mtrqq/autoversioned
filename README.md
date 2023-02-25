@@ -1,3 +1,4 @@
 ## TODOs
 
-1. Host helm chart releases with github pages and automate their releases
+1. add README files
+2. customize the way how releases look + add some info about helm charts
