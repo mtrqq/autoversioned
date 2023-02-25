@@ -45,7 +45,7 @@ func main() {
     mux.HandleFunc("/", getVersion)
     mux.HandleFunc("/health", getHealth)
 
-    log.Info().Msg("Starting http server at port 8080")
+    log.Info().Msgf("Starting http server at port %d", port)
     http.ListenAndServe(fmt.Sprintf(":%d", port), mux)
 }
 

@@ -14,4 +14,4 @@ FROM alpine:3.17.2
 WORKDIR /usr/app
 COPY --from=builder /usr/app/serve /usr/app
 
-ENTRYPOINT ["/usr/app/serve"]
+ENTRYPOINT ["./serve"]
