@@ -2,7 +2,7 @@
 commitizen:
   name: cz_conventional_commits
   tag_format: v$major.$minor.$patch$prerelease
-  version: 2.4.0
+  version: 2.4.1
   version_files:
   - api/internal/config.go:^    Version =
   - 'charts/autoversioned/Chart.yaml:^version:'
