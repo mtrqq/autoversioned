@@ -1,4 +1,4 @@
-# CSI WekaFS Driver
+# Description
 
 Helm chart for deploying `autoversioned` application components into K8S cluster
 
