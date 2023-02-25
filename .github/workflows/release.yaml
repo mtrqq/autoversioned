@@ -180,3 +180,39 @@ jobs:
         file: docker_image_api.txt
         release_id: ${{ needs.create-release.outputs.id }}
         overwrite: true
+
+  build-chart:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # to upload resources to github release
+    env:
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    needs:
+      - create-release
+
+    steps:
+    - uses: actions/checkout@v3.3.0
+      with:
+        ref: ${{ needs.create-release.outputs.branch }}
+
+    - uses: azure/setup-helm@v3
+      with:
+        version: v3.11.1
+
+    - name: Create package
+      run: helm package charts/* -d ./packages
+
+    - uses: actions/checkout@v3.3.0
+      with:
+        ref: gh-pages
+        clean: false
+
+    - name: Update index.yaml
+      run: |
+        mv -v build/* . && helm repo index --url https://mtrqq.github.io/autoversioned --merge index.yaml .
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_user_email: github-actions[bot]@users.noreply.github.com
+        commit_user_name: github-actions[bot]
+        commit_message: Release package for ${{ needs.create-release.outputs.tag }} release (${{ github.sha }})
