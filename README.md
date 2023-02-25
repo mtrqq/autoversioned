@@ -8,9 +8,9 @@ Helm chart for deploying `autoversioned` application components into K8S cluster
 
 ## Maintainers
 
-| Name | Email | Url |
-| ---- | ------ | --- |
-| Mtrqq, Inc. | <maxym.fugol@gmail.com> | <https://github.com/mtrqq> |
+| Name  | Email                   | Url                        |
+| ----- | ----------------------- | -------------------------- |
+| Mtrqq | <maxym.fugol@gmail.com> | <https://github.com/mtrqq> |
 
 ## Pre-requisites
 
