@@ -1,3 +1,9 @@
+## v2.4.1 (2023-02-25)
+
+### Fix
+
+- change folder name for releasing
+
 ## v2.4.0 (2023-02-24)
 
 ### Feat
