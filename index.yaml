@@ -2,8 +2,17 @@ apiVersion: v1
 entries:
   autoversioned:
   - apiVersion: v2
+    appVersion: 2.4.3
+    created: "2023-09-01T06:00:45.365576598Z"
+    digest: 56ebddac9f985ef3c20faf16703408c9c64f6f2e300b64f0a69a682f15dca414
+    name: autoversioned
+    type: application
+    urls:
+    - https://mtrqq.github.io/autoversioned/autoversioned-2.4.3.tgz
+    version: 2.4.3
+  - apiVersion: v2
     appVersion: 2.4.2
-    created: "2023-02-25T08:44:15.733534788Z"
+    created: "2023-09-01T06:00:45.365070679Z"
     digest: 98990dcc91610046c715f49e920ea7cac247b76fef9cfc1d6a1d2e5eae44d5ad
     name: autoversioned
     type: application
@@ -12,11 +21,11 @@ entries:
     version: 2.4.2
   - apiVersion: v2
     appVersion: 2.4.1
-    created: "2023-02-25T08:44:15.733087386Z"
+    created: "2023-09-01T06:00:45.364601762Z"
     digest: a7e36b6515b3e463fbed9d0620e07aef8644392bb9c7d7043964310f01d743a1
     name: autoversioned
     type: application
     urls:
     - https://mtrqq.github.io/autoversioned/autoversioned-2.4.1.tgz
     version: 2.4.1
-generated: "2023-02-25T08:44:15.732391681Z"
+generated: "2023-09-01T06:00:45.363922437Z"
