@@ -1,3 +1,9 @@
+## v2.4.3 (2023-09-01)
+
+### Fix
+
+- **config**: fix API configuration location in cz.yaml
+
 ## v2.4.2 (2023-02-25)
 
 ## v2.4.1 (2023-02-25)
