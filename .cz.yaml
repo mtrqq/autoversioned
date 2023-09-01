@@ -4,6 +4,6 @@ commitizen:
   tag_format: v$major.$minor.$patch$prerelease
   version: 2.4.2
   version_files:
-  - api/internal/config.go:^    Version =
+  - api/internal/config/config.go:^    Version =
   - 'charts/autoversioned/Chart.yaml:^version:'
   - 'charts/autoversioned/Chart.yaml:^appVersion:'
