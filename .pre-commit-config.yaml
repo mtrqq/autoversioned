@@ -1,10 +1,22 @@
 repos:
--   hooks:
-    -   id: end-of-file-fixer
-    -   id: trailing-whitespace
-    repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    hooks:
+      - id: end-of-file-fixer
+        exclude: .*\.gotmpl
+      - id: trailing-whitespace
     rev: v4.4.0
--   hooks:
-    -   id: remove-tabs
-    repo: https://github.com/Lucas-C/pre-commit-hooks
+
+  - repo: https://github.com/Lucas-C/pre-commit-hooks
+    hooks:
+      - id: remove-tabs
     rev: v1.4.2
+
+  - repo: https://github.com/norwoodj/helm-docs
+    rev: v1.11.3
+    hooks:
+      - id: helm-docs-built
+        args:
+          # Make the tool search for charts only under the `charts` directory
+          - --chart-search-root=charts
+          - --template-files=README.md.gotmpl
+          - --output-file=../../README.md
